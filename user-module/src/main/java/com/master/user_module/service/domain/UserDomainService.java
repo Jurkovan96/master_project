@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,5 +32,9 @@ public class UserDomainService {
                     log.error("Cannot get user with email {}", email);
                     return new ResourceNotFoundException("message", email);
                 });
+    }
+
+    public Collection<User> findAllUsers() {
+        return userRepository.findAll();
     }
 }
