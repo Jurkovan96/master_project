@@ -1,0 +1,29 @@
+version: "3"
+services:
+  #Database service
+  mysql_database:
+    image: 'mysql:latest'
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin1
+      - MYSQL_PASSWORD=admin1
+      - MYSQL_DATABASE=skills_management_db
+      - MYSQL_USER=user2
+    ports:
+      - "3390:3306"
+    volumes:
+      - ./app_data:/var/lib/mysql
+
+  #Spring app
+  skills-management:
+    image: skills-management
+    ports:
+      - "9095:8082"
+    environment:
+      MYSQL_URL: jdbc:mysql://mysql_database/skills_management_db
+      MYSQL_USER: "user2"
+      MYSQL_PASSWORD: "admin1"
+    build:
+      context: "./"
+      dockerfile: "Dockerfile"
+    depends_on:
+      - mysql_database
