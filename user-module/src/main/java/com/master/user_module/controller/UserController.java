@@ -3,7 +3,7 @@ package com.master.user_module.controller;
 
 import com.master.user_module.dto.request.CreateUserRequest;
 import com.master.user_module.dto.response.CreateUserResponse;
-import com.master.user_module.repository.UserRepository;
+import com.master.user_module.service.application.UserApplicationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserApplicationService userApplicationService;
 
     @PostMapping("/user")
     public ResponseEntity<CreateUserResponse> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
